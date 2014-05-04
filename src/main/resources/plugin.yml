@@ -1,0 +1,4 @@
+author: vemacs
+main: me.vemacs.inventorysync.InventorySync
+name: InventorySync
+version: '1.0'
