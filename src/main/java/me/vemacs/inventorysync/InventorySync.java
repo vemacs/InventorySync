@@ -43,8 +43,8 @@ public class InventorySync extends JavaPlugin implements Listener {
             public void run() {
                 Jedis jedis = pool.getResource();
                 try {
-                    if (jedis.exists(uuid.toString())) {
-                        final String serialized = jedis.get(uuid.toString());
+                    if (jedis.exists("inventory:" + uuid)) {
+                        final String serialized = jedis.get("inventory:" + uuid.toString());
                         Bukkit.getScheduler().runTask(InventorySync.instance, new BukkitRunnable() {
                             @Override
                             public void run() {
@@ -79,7 +79,7 @@ public class InventorySync extends JavaPlugin implements Listener {
             public void run() {
                 Jedis jedis = pool.getResource();
                 try {
-                    jedis.set(uuid.toString(), serialized);
+                    jedis.set("inventory:" + uuid.toString(), serialized);
                 } catch (Exception e) {
                     pool.returnBrokenResource(jedis);
                     return;
